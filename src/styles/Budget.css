@@ -1,0 +1,463 @@
+/* Importar variáveis globais se estiverem em um arquivo separado, ou definir aqui */
+:root {
+    --primary-color: #2c3e50; /* Azul escuro/cinza para elementos primários */
+    --secondary-color: #3498db; /* Azul vibrante para elementos secundários */
+    --accent-color: #e74c3c; /* Vermelho para ações destrutivas/erros */
+    --text-color: #333;
+    --light-text-color: #f4f4f4;
+    --border-color: #ddd;
+    --background-color: #f4f7f6;
+    --card-background: #ffffff;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --info-color: #3498db; /* Cor para status 'Em análise' */
+    --danger-color: #e74c3c; /* Cor para status 'Reprovado' */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* --- Container do Dashboard --- */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- Área de Conteúdo Principal --- */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+    margin-left: 250px; /* Ajustar baseado na largura da sidebar */
+}
+
+.main-content.sidebar-open {
+    margin-left: 0; /* Sem margem quando a sidebar está fechada (ou escondida para mobile) */
+}
+
+/* --- Menu Hamburguer (para mobile) --- */
+.hamburger-menu {
+    display: none; /* Escondido por padrão para desktop */
+    font-size: 2em;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001; /* Acima da sidebar */
+    color: var(--primary-color);
+}
+
+/* --- Container de Formulário & Container de Lista --- */
+.form-container, .budgets-container {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 1000px; /* Ajuste para ter mais espaço */
+    margin: 20px auto;
+}
+
+.form-header, .budgets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.form-header h2, .budgets-header h2 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.back-btn, .add-budget-btn {
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn:hover, .add-budget-btn:hover {
+    background-color: #2780b9; /* Tom mais escuro de azul */
+    transform: translateY(-2px);
+}
+
+/* --- Formulário de Orçamento --- */
+.budget-form .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select {
+    width: calc(100% - 20px);
+    padding: 12px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.form-group .readonly-field {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.error {
+    color: var(--accent-color);
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
+/* --- Ações do Formulário --- */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.submit-btn, .cancel-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #229a5a;
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background-color: #95a5a6; /* Cinza para cancelar */
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+/* --- Lista/Grid de Orçamentos --- */
+.stats-card {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.stat-item {
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+}
+
+.stat-item .stat-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.stat-item .stat-label {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    margin-top: 40px;
+    background-color: #fdfdfd;
+}
+
+.empty-image {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.empty-state h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.6em;
+}
+
+.empty-state p {
+    color: #777;
+    font-size: 1.1em;
+    margin-bottom: 25px;
+}
+
+.pending-budgets-section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.pending-budgets-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.6em;
+}
+
+.budgets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.budget-card {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.budget-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.budget-card .card-header {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.budget-card .card-header h3 {
+    margin: 0;
+    font-size: 1.3em;
+}
+
+.budget-status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+    color: var(--light-text-color);
+}
+
+.budget-status.em-analise {
+    background-color: var(--info-color);
+}
+
+.budget-status.aprovado {
+    background-color: var(--success-color);
+}
+
+.budget-status.reprovado {
+    background-color: var(--danger-color);
+}
+
+.budget-card .card-body {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.budget-card .detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 8px;
+}
+
+.budget-card .detail-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: var(--primary-color);
+    flex-basis: 40%;
+}
+
+.detail-value {
+    text-align: right;
+    flex-basis: 60%;
+    color: var(--text-color);
+}
+
+.budget-card .card-footer {
+    background-color: #f9f9f9;
+    padding: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.budget-card .card-footer button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.budget-card .edit-btn {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.budget-card .edit-btn:hover {
+    background-color: #2780b9;
+}
+
+.budget-card .delete-btn {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.budget-card .delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.budget-card .approve-btn {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.budget-card .approve-btn:hover {
+    background-color: #229a5a;
+}
+
+/* --- Ajustes Responsivos --- */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0; /* Remove margem quando a sidebar está fechada */
+        padding: 15px;
+    }
+
+    .hamburger-menu {
+        display: block; /* Mostra hamburguer em telas menores */
+    }
+
+    .form-header, .budgets-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-header h2, .budgets-header h2 {
+        margin-bottom: 15px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+
+    .budget-form .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-card {
+        flex-direction: column;
+    }
+
+    .stat-item {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .budget-card .card-footer {
+        flex-direction: column;
+    }
+
+    .budget-card .card-footer button {
+        width: 100%;
+    }
+}
+
+.budget-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.budget-status.em-análise {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.budget-status.aprovado {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.budget-status.reprovado {
+  background-color: #f8d7da;
+  color: #721c24;
+}

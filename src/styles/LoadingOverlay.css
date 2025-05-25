@@ -1,0 +1,177 @@
+/* === OVERLAY PRINCIPAL === */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(29, 78, 216, 0.2) 0%, transparent 30%),
+    radial-gradient(circle at 80% 70%, rgba(29, 78, 216, 0.2) 0%, transparent 30%),
+    linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* === ZEUS CONTAINER === */
+.zeus-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 2.5rem;
+  filter: drop-shadow(0 0 25px rgba(66, 153, 225, 0.8));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zeus-image {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  filter: 
+    brightness(0) 
+    invert(1) 
+    drop-shadow(0 0 15px rgba(255, 255, 255, 0.7));
+  z-index: 2;
+}
+
+/* === AURÉOLA === */
+.zeus-container::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  right: -30px;
+  bottom: -30px;
+  background: radial-gradient(
+    circle, 
+    rgba(66, 153, 225, 0.4) 0%, 
+    rgba(29, 78, 216, 0.2) 50%, 
+    transparent 70%
+  );
+  border-radius: 50%;
+  opacity: 0.8;
+  z-index: 1;
+  animation: auraPulse 3s ease-in-out infinite;
+}
+
+@keyframes auraPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.95); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+
+/* === PROGRESS === */
+.progress-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 6;
+}
+
+.progress-circle {
+  fill: none;
+  stroke: url(#progressGradient);
+  stroke-linecap: round;
+  stroke-width: 6;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+  stroke-dasharray: 565;
+  stroke-dashoffset: 282;
+  filter: drop-shadow(0 0 8px rgba(66, 153, 225, 0.6));
+  transition: stroke-dashoffset 0.5s ease-out;
+}
+
+/* === TEXTO DE CARREGAMENTO === */
+.loading-text {
+  color: white;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 2rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.loading-text::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(
+    90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.8), 
+    transparent
+  );
+  border-radius: 3px;
+  animation: underlinePulse 2s ease-in-out infinite;
+}
+
+@keyframes underlinePulse {
+  0%, 100% { width: 60px; opacity: 0.7; }
+  50% { width: 100px; opacity: 1; }
+}
+
+
+/* === PARTÍCULAS DINÂMICAS === */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+  animation: particleFloat 10s linear infinite;
+  opacity: 0;
+}
+
+.particle:nth-child(odd) {
+  background-color: rgba(200, 230, 255, 0.9);
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) translateX(calc(50vw - 50%));
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) translateX(calc(50vw - 50% + random(100) - 50px));
+    opacity: 0;
+  }
+}
+
