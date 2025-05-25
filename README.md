@@ -1,54 +1,99 @@
-# React + TypeScript + Vite
+# ⚡ Trilha Front End
+**Zeus** é um sistema interno desenvolvido com **React + TypeScript** para a **Comp Júnior** realizar a gestão de membros e orçamentos de forma eficiente.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Captura de tela 2025-05-24 223852](https://github.com/user-attachments/assets/86b983b7-c7d0-48b8-ad4b-7d92cc38285e)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📌 Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 👥 **Gestão de Membros**
+  - Cadastro e edição de informações
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+
+- 📋 **Gerenciamento de Orçamentos**
+  - Criação e acompanhamento de orçamentos
+  - Atribuição de membros
+  - Timeline e marcos importantes
+
+
+- 📱 **Interface Responsiva** otimizada para as maiorias das telas.
+
+## 🚀 Tecnologias Utilizadas
+
+- [React](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/)
+- [React Router](https://reactrouter.com/)
+- [Lucide React](https://lucide.dev/) (ícones)
+- [Firebase](https://firebase.google.com/?hl=pt-br) 
+
+
+## 🏗️ Arquitetura do Projeto
+
+```
+src/
+├── assets/                 # Imagens, ícones e outros recursos estáticos
+├── components/             # Componentes reutilizáveis
+├── pages/                 # Páginas da aplicação
+├── services/              # Serviços e APIs
+├── styles/                # Estilos globais e configurações
+├── App.tsx
+└── index.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎨 Design e UX
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+O projeto foi desenvolvido seguindo as diretrizes do design disponibilizado no **Figma**, com liberdade para melhorias e adaptações que aprimoram a experiência do usuário. A interface foi pensada para ser:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+- **Intuitiva**: Navegação clara e objetiva
+- **Moderna**: Visual limpo e contemporâneo
+- **Responsiva**: Experiência otimizada em todos os dispositivos
+- **Acessível**: Seguindo boas práticas de acessibilidade
+
+## 💡 Como Rodar o Projeto Localmente
+
+```bash
+# Clone o repositório
+git clone https://github.com/jpedroreiss/trilha-front-comp
+
+# Acesse a pasta do projeto
+cd trilha-front-comp
+
+# Instale as dependências
+npm install
+
+# Execute o projeto em modo de desenvolvimento
+npm run dev
+
 ```
+
+
+## 🎯 Requisitos Atendidos
+
+- ✅ Aplicação segue o documento de requisitos
+- ✅ Interface responsiva
+- ✅ Arquitetura de pastas organizada
+- ✅ Importação adequada de componentes
+- ✅ Design adaptado com melhorias
+
+
+## 🚧 Problemas Enfrentados e Soluções
+
+Durante o desenvolvimento, alguns desafios foram identificados e solucionados:
+
+### Responsividade Complexa
+**Problema**: Adaptar layouts complexos para diferentes tamanhos de tela.
+
+### Performance em Listas Grandes
+**Problema**: Renderização lenta com muitos itens.
+**Solução**: Implementação de paginação e lazy loading nos componentes de lista.
+
+
+---
+
+## 🏢 Sobre o Projeto
+
+Este projeto foi desenvolvido como parte do processo Trainee para a **Comp Júnior**.
+
+![Captura de tela 2025-05-19 190907](https://github.com/user-attachments/assets/023adad6-2975-46eb-8499-7cfbbdc0af0b)
+
