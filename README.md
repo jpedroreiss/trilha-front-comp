@@ -68,15 +68,6 @@ npm run dev
 ```
 
 
-## 🎯 Requisitos Atendidos
-
-- ✅ Aplicação segue o documento de requisitos
-- ✅ Interface responsiva
-- ✅ Arquitetura de pastas organizada
-- ✅ Importação adequada de componentes
-- ✅ Design adaptado com melhorias
-
-
 ## 🚧 Problemas Enfrentados e Soluções
 
 Durante o desenvolvimento, alguns desafios foram identificados e solucionados:
